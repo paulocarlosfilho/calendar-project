@@ -16,7 +16,7 @@ Um aplicativo de calendário simples para gerenciar eventos e compromissos diár
 4. Abra seu navegador e acesse o seguinte endereço:
 `http://localhost/caledar-project/index.php` (Esse ponto é facultativo)
 5. Criar o arquivo styles.css
-6. Criar o arquivo calcendar.js
+6. Criar o arquivo calendar.js
 
 
 ---
