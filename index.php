@@ -31,8 +31,11 @@
 </div>
 
 <!-- Modal for Add/Edit/Delete Appointment -->
+<div class="modal" id="eventModal">
+    <div class="modal-content">
+
 <div id="eventSelectorWrapper">
-        <strong>Select Event</strong>
+        <strong>Select Event:</strong>
     </label>
     <select id="eventSelector">
         <option disable selector>Choose Event...</option>
@@ -73,7 +76,15 @@
 </form>
 
 <!-- ❌ Cancelado -->
+<button type="button" class="submit-btn">❌ Cancelar</button>
+
+    </div>
+</div>
+
+<script src="calendar.js"></script>
 
 </body>
+
+
 
 </html>
