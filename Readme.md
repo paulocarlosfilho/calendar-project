@@ -12,11 +12,11 @@ Um aplicativo de calendário simples para gerenciar eventos e compromissos diár
 ### Passos
 1. Certifique-se de que o **Apache** está em execução no painel de controle do XAMPP.
 2. Copie a pasta `caledar-project` para o diretório `C:\xampp\htdocs`.
-3.  Crie o arquivo index.php
+3.  Crie o arquivo `index.php`
 4. Abra seu navegador e acesse o seguinte endereço:
 `http://localhost/caledar-project/index.php` (Esse ponto é facultativo)
-5. Criar o arquivo styles.css
-6. Criar o arquivo calendar.js
+5. Criar o arquivo `styles.css`
+6. Criar o arquivo `calendar.js`
 
 
 ---
