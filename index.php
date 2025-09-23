@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadelário - pcsf</title>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylesheet.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -54,16 +57,13 @@
     
     <label for="instructorName">Instructor Name:</label>
     <input type="text" name="instructor_name" id="instructorName" require>
-    <br>
 
     <label for="startDate">Start Date:</label>
     <input type="date" name="start_date" id="startDate" required>
-    <br>
 
     <label for="endDate">End Date:</label>
     <input type="date" name="end_date" id="endDate" required>
     <button type="submit">💾 Save</button>
-    <br>
 
 </form>
 
