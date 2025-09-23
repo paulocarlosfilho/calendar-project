@@ -18,6 +18,7 @@ Um aplicativo de calendário simples para gerenciar eventos e compromissos diár
 5. Criar o arquivo `stylesheet.css`
 6. Criar o arquivo `calendar.js`
 7. Criar o arquivo `calendar.php`
+8. Criar o arquivo `connection.php`
 
 
 ---
