@@ -1,7 +1,19 @@
 <?php
 
-// 1. Connection to Local MysQL Server (using XAMPP or MAMPP)
+// 1. Connection to Local MySQL Server (using XAMPP or MAMPP)
 
-$username = "root"
-$conn - new mysqli("Localhost", $username, "my-calendar");
-$conn>set_charset("utf8mb4");
+$username = "root";
+$password = "";
+$database = "meu-caledario";
+
+$conn = new mysqli("localhost", $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Set charset
+$conn->set_charset("utf8mb4");
+
+?>
