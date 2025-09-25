@@ -5,6 +5,7 @@ include 'connection.php';
 
 $sucessMsg = "";
 $errorMsg = "";
+$eventsFromDb = []; // Array para armazenar eventos do banco de dados
 
 # Tratar a Adição do Compromisso
 if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["action"] ?? '') === "add") {
@@ -52,3 +53,66 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["action"] ?? '') === "edit"
         exit();
     }
 }
+
+# 🗑 Handler Exclusão do Compromisso
+if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["action"] ?? '') === "delete") {
+
+    $id = $_POST["id"] ?? null;
+
+    if ($id) {
+        $stmt = $conn->prepare("DELETE FROM meu_calendario WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->close();
+        header("Location: " . $_SERVER['PHP_SELF'] . "?success=3");
+        exit();
+    } else {
+        header("Location: " . $_SERVER['PHP_SELF'] . "?error=3");
+        exit();
+    }
+}
+
+
+# Sucesso e Erro Mensagens 
+if(isset($_GET['success'])) {
+    $sucessMsg = match ($_GET['success']) {
+         '1' => "✅ Compromisso adicionado com sucesso!",
+         '2' => "✅ Compromisso atualizado com sucesso!",
+         '1' => "🗑 Compromisso deletado com sucesso!",
+         default => ''
+    };
+}
+
+if(isset($_GET['error'])) {
+    $errorMsg = match ($_GET['error']) {
+         '1' => "❌ Erro ao adicionar compromisso. Por favor, tente novamente.",
+         '2' => "❌ Erro ao atualizar compromisso. Por favor, tente novamente.",
+         '3' => "❌ Erro ao deletar compromisso. Por favor, tente novamente.",
+         default => ''
+    };
+}
+
+# 📅 Buscar Todos os Compromissos e Distribuir (ou Exibir) em um Intervalo de Datas.
+$result = $conn->query("SELECT * FROM meu_calendario ORDER BY data_inicio, hora_inicio");
+if($result && $result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $start = new DateTime($row['data_inicio']);
+        $end = new DateTime($row['data_fim']);
+
+        while($start <= $end) {
+            $eventsFromDb[] = [
+                'id' => $row['id'],
+                'titulo' => "{$row['titulo']} - {$row['localizacao']}",
+                'data' => $start->format('Y-m-d'),
+                'start' => $row['hora_inicio'],
+                'end' => $row['hora_fim']
+            ];
+
+            $start->modify('+1 day');
+        }
+    }
+} 
+
+$conn->close();
+
+?>
