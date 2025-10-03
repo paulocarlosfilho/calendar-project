@@ -19,6 +19,10 @@ Um aplicativo de calendário simples para gerenciar eventos e compromissos diár
 6. Criar o arquivo `calendar.js`
 7. Criar o arquivo `calendar.php`
 8. Criar o arquivo `connection.php`
+9. Criar o arquivo `fetch_events.php`
+
+Completo! 
+Agora que finalizamos o projeto, vamos por ele em um docker, e posteriormente, iniciaceremos a por o nosso projeto na AWS.
 
 
 ---
