@@ -57,6 +57,24 @@ Devido a problemas de virtualização no ambiente local (conforme nota na seçã
 Para executar os testes de Q.A. e confirmar a funcionalidade do calendário:
 
 1. Node.js & npm (Necessário para rodar o Cypress).
-2. Servidor web XAMPP (Apache e MySQL devem estar ativos, rodando o projeto em ´http://localhost/calendar-project/index.php).´
+2. Servidor web XAMPP (Apache e MySQL devem estar ativos, rodando o projeto em `http://localhost/calendar-project/index.php`).
 
 ### Como Rodar os Testes
+
+* Primeiramente, é necessario criar um diretório que será assim `calendar-qa-tests`. Isso é necessario para poder separar o produto da area de testes.
+
+* Agora você entra na pesta criada: `cd calendar-qa-tests`
+
+* Criar duas pastas, a `cypress` e a `e2e` e criar o arquivo `api_fetch_events.cy.js` de forma que fique assim:
+
+`cypress\e2e\api_fetch_events.cy.js`
+
+* Dentro dessa pasta você abre o cmd e digita `npm init -y` - Isso criar o package.json
+
+* Agora voccê preciso instalar o Cypress no seu projeto, digita isso: `npm install cypress --save-dev`
+
+* Em seguida so precisa pedir para abrir o Cypress: `npx cypress open`
+
+Concluido!
+
+<hr>

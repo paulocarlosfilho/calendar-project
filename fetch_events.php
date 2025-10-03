@@ -43,5 +43,4 @@ header('Content-Type: application/json');
 echo json_encode($events);
 
 // Encerra o script
-exit(); 
-?>
+exit();
