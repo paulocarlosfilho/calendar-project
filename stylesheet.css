@@ -137,17 +137,44 @@ header{
 .event{
     background-color: var(--primary);
     color: #fff;
-    padding: 4px 6px;
-    border-radius: 4px;
-    margin-top: 4px;
-    font-size: 14px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    margin-top: 6px;
+    font-size: 13px;
     cursor: pointer;
-    transition: trasform 0.2s ease;
+    line-height: 1.4;
+    display:  flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    transition: trasform 0.15s ease;
 }
 
 .event:hover{
-    transform: scale(1.03);
+    transform: scale(1.02);
     margin-bottom: 2px;
+}
+
+.event .titulo {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.event .localizacao{
+    font-size: 12px;
+    opacity: 0,85;
+}
+
+.event .time{
+    font-size: 12px;
+    margin-top: 3px;
+    color: #f3f3f3;
+}
+
+.event-meta{
+    font-size: 12px;
+    color: #eef;
+    line-height: 1.2;
 }
 
 /* Alert Boxes */
@@ -183,6 +210,7 @@ header{
     justify-content: center;
     background-color: rgba(0,0,0,0.5);
     z-index: 9999;
+    padding: 20px;
 }
 
 .modal-content{
@@ -192,6 +220,8 @@ header{
     width: 100%;
     max-width: 420px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .modal-content label{
