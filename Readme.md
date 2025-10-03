@@ -2,7 +2,9 @@
 
 Um aplicativo de calendário simples, baseado em conceitos de gerenciamento de compromissos diários, com foco em estabilidade e qualidade de software.
 
-<img height="360" src="img/1.png"/>
+<p align="center">
+  <img height="360" src="img/1.png" alt="Captura de tela do Calendário"/>
+</p>
 
 ---
 
