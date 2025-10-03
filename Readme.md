@@ -3,7 +3,9 @@
 Um aplicativo de calendário simples, baseado em conceitos de gerenciamento de compromissos diários, com foco em estabilidade e qualidade de software.
 
 <p align="center">
-  <img height="360" src="img/1.png" alt="Captura de tela do Calendário"/>
+  <a href="URL_DO_SEU_REPOSITORIO_DE_TESTES">
+    <img height="360" src="img/1.png" alt="Captura de tela do Calendário - CLIQUE AQUI PARA VER OS TESTES DE QA"/>
+  </a>
 </p>
 
 ---
