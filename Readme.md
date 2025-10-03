@@ -3,9 +3,9 @@
 Um aplicativo de calendário simples, baseado em conceitos de gerenciamento de compromissos diários, com foco em estabilidade e qualidade de software.
 
 <p align="center">
-  <a href="calendar-qa-tests/">
-    <img height="360" src="img/1.png" alt="Captura de tela do Calendário - CLIQUE AQUI PARA VER OS TESTES DE QA"/>
-  </a>
+  <a href="https://github.com/paulocarlosfilho/calendar-qa-tests">
+    <img height="360" src="img/1.png" alt="Captura de tela do Calendário - CLIQUE AQUI PARA VER OS TESTES DE QA"/>
+  </a>
 </p>
 
 ---
