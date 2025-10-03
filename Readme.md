@@ -2,6 +2,8 @@
 
 Um aplicativo de calendário simples, baseado em conceitos de gerenciamento de compromissos diários, com foco em estabilidade e qualidade de software.
 
+![Imagem de demonstração do calendário](img/1.jpg)
+
 ---
 
 ## ⚙️ 1. Configuração da Aplicação Principal (`calendar-project`)
