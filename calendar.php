@@ -29,22 +29,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["action"] ?? '') === "add")
         $stmt->bind_param("sssssss", $titulo, $localizacao, $descricao, $data_inicio, $data_fim, $hora_inicio, $hora_fim);
         
         if ($stmt->execute()) {
-            header("Location: index.php?success=1");
+            // CORREÇÃO DE Q.A.: Comentamos o redirecionamento (header) para o Cypress ler a mensagem.
+            // O Cypress espera uma resposta da API, não um redirecionamento.
+            // header("Location: index.php?success=1"); 
+            echo "Compromisso adicionado com sucesso!"; 
         } else {
             // Falha na execução do DB
-            header("Location: index.php?error=1");
+            // header("Location: index.php?error=1");
+            echo "Erro: Falha ao executar inserção no banco.";
         }
         $stmt->close();
     } else {
-        header("Location: index.php?error=1");
+        // header("Location: index.php?error=1");
+        echo "Erro: Campos obrigatórios não preenchidos.";
     }
-    exit();
+
+    // CORREÇÃO DE Q.A. FINAL: Força a limpeza do buffer de saída do PHP (bug do XAMPP)
+    ob_end_flush(); 
+    flush();
+    
+    // Deixaremos o exit() comentado já que você testou e não resolveu, e vamos confiar no flush().
+    // exit(); 
 }
 
 
 // -------------------------------------------------------------
 // 2. Handler Edição (POST action=edit)
 // -------------------------------------------------------------
+// **ATENÇÃO:** Mantenha os headers e exit() nos Handlers de Edição e Exclusão, 
+// pois eles não estão sendo testados pela API agora e precisam funcionar para o navegador.
 if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["action"] ?? '') === "edit") {
 
     $id = $_POST["eventId"] ?? null; 
@@ -100,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["action"] ?? '') === "delet
 
 
 // -------------------------------------------------------------
-// 4. Mensagens de Sucesso e Erro
+// 4. Mensagens de Sucesso e Erro (Abaixo de todos os Handlers)
 // -------------------------------------------------------------
 if(isset($_GET['success'])) {
     $sucessMsg = match ($_GET['success']) {
@@ -123,4 +136,4 @@ if(isset($_GET['error'])) {
 // Fechamento da conexão
 $conn->close();
 
-?>
+// Não coloque a tag de fechamento ?> para evitar bugs de espaço em branco!

@@ -1,80 +1,60 @@
-# Meu Calendário
+# 📅 Meu Calendário (PHP/MySQL)
 
-<p>Um aplicativo de calendário simples para gerenciar eventos e compromissos diários, beseado nos da google.</p>
+Um aplicativo de calendário simples, baseado em conceitos de gerenciamento de compromissos diários, com foco em estabilidade e qualidade de software.
 
-## Como rodar o projeto
-
-### Pré-requisitos
-- Servidor web **XAMPP**
-- Navegador web moderno
-- PHP, MySQL, JavaScript, HTML, and CSS
-
-### Passos
-1. Certifique-se de que o **Apache** está em execução no painel de controle do XAMPP.
-2. Copie a pasta `caledar-project` para o diretório `C:\xampp\htdocs`.
-3.  Crie o arquivo `index.php`
-4. Abra seu navegador e acesse o seguinte endereço:
-`http://localhost/caledar-project/index.php` (Esse ponto é facultativo)
-5. Criar o arquivo `stylesheet.css`
-6. Criar o arquivo `calendar.js`
-7. Criar o arquivo `calendar.php`
-8. Criar o arquivo `connection.php`
-9. Criar o arquivo `fetch_events.php`
-
-<p>Completo! </p>
-<p>Agora que finalizamos o projeto, vamos por ele em um docker, e posteriormente, iniciaceremos a por o nosso projeto na AWS.</p>
-
-<hr>
-
-### Docker
-<p>O primeiro passo é criar o Dockerfile (Para iniciar apenas esse projeto) e o docker-compose.yml (para iniciar esse projeto e por ele dentro de um compose)</p>
-
-1. Criar o `Dockerfile`
-2. Criar o `docker-compose.yml`
-
-<strong>Nota:</strong> Para iniciar como docker e esquecer o XAAMP, é necessario atualizar o arquivo de `connection.php`
-
-<p>$host = "db"; // <--- MUDANÇA AQUI! Não é mais 'localhost'</p>
-<p>$username = "root"; </p>
-<p>$password = ""; // Se você mudar a senha no docker-compose, mude aqui também</p>
-<p>$dbname = "meu_calendario";</p>
-
-<p>$conn = new mysqli($host, $username, $password, $dbname);</p>
 ---
 
-<strong>Nota:</strong> O docker ta dando erro no meu pc, e eu não com tempo para trocar, formatar, etc... No lugar em trazer para o docker e fazer o terraform para por na aws, eu vou fazer os testes aqui. usarei o `Cypress` que funciona no `node`. Porém, deixarei os arquivos de Dockerfile e docker-compose.yml, pois pretendo contunuar em breve. Devido a esse fim, será necessario voltar o arquivo `connection.php`, removendo o `$host` e deixando como `localhost`.
+## ⚙️ 1. Configuração da Aplicação Principal (`calendar-project`)
 
+Esta seção detalha o setup da aplicação principal (PHP/MySQL) em um ambiente local XAMPP.
 
-<p>Em desenvolviomento...</p>
+### Pré-requisitos
+* **Servidor Web:** XAMPP (Apache e MySQL)
+* **Tecnologias:** PHP, MySQL, JavaScript, HTML e CSS
 
-<hr>
+### Passos para Configuração Local
+1.  **Inicie os Serviços:** Certifique-se de que o **Apache** e o **MySQL** estão em execução no painel de controle do XAMPP.
+2.  **Copie a Aplicação:** Copie a pasta **`calendar-project`** para o diretório de documentos do servidor (`C:\xampp\htdocs`).
+3.  **Acesse a Aplicação:** Abra o navegador e acesse: `http://localhost/calendar-project/index.php`
 
-### 💻Cypress (Automação de Q.A)
+---
 
-Devido a problemas de virtualização no ambiente local (conforme nota na seção Docker), priorizamos o objetivo principal de Qualidade de Software. A automação de testes de interface (UI) é executada usando o Cypress através do Node.js, validando o projeto rodando no XAMPP.
+## 💻 2. Automação de Qualidade (QA) com Cypress
+
+Devido à priorização de tempo e problemas de virtualização local, a automação de testes de API é executada no Node.js/Cypress, validando o backend rodando no XAMPP.
+
+### Estrutura de Diretórios
+Os testes estão isolados no diretório **`calendar-qa-tests`** para separar o código de produção do código de teste.
 
 ### Pré-requisitos para Testes
-Para executar os testes de Q.A. e confirmar a funcionalidade do calendário:
+1.  **Node.js & npm** (Necessário para o Cypress).
+2.  **Projeto Ativo:** O servidor XAMPP deve estar rodando o projeto.
 
-1. Node.js & npm (Necessário para rodar o Cypress).
-2. Servidor web XAMPP (Apache e MySQL devem estar ativos, rodando o projeto em `http://localhost/calendar-project/index.php`).
+### Como Rodar os Testes de API
+1.  **Navegue para o Diretório de Testes:**
+    ```bash
+    cd calendar-qa-tests
+    ```
+2.  **Instale o Cypress** (Apenas na primeira vez):
+    ```bash
+    npm install cypress --save-dev
+    ```
+3.  **Abra o Cypress Test Runner:**
+    ```bash
+    npx cypress open
+    ```
+4.  **Execute a Suíte:** No Test Runner, selecione o arquivo **`api_test_suite.cy.js`** para iniciar a execução dos testes de API.
 
-### Como Rodar os Testes
+---
 
-* Primeiramente, é necessario criar um diretório que será assim `calendar-qa-tests`. Isso é necessario para poder separar o produto da area de testes.
+## ☁️ 3. DevOps e Infraestrutura (Próximos Passos)
 
-* Agora você entra na pesta criada: `cd calendar-qa-tests`
+O projeto está preparado para a transição para containers e cloud.
 
-* Criar duas pastas, a `cypress` e a `e2e` e criar o arquivo `api_fetch_events.cy.js` de forma que fique assim:
+### Arquivos de Containerização
+Os seguintes arquivos estão inclusos, mas ainda não estão sendo utilizados para a execução dos testes:
+* **`Dockerfile`**: Configuração do container da aplicação.
+* **`docker-compose.yml`**: Orquestração da aplicação com o serviço de banco de dados (Host: `db`).
 
-`cypress\e2e\api_fetch_events.cy.js`
-
-* Dentro dessa pasta você abre o cmd e digita `npm init -y` - Isso criar o package.json
-
-* Agora voccê preciso instalar o Cypress no seu projeto, digita isso: `npm install cypress --save-dev`
-
-* Em seguida so precisa pedir para abrir o Cypress: `npx cypress open`
-
-Concluido!
-
-<hr>
+**Observação de Conexão:**
+Para rodar os testes no ambiente local (XAMPP), o arquivo `connection.php` deve usar **`$host = "localhost";`**. A alteração para `$host = "db";` será necessária ao migrar para o Docker-Compose.
