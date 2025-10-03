@@ -1,6 +1,6 @@
 # Meu Calendário
 
-Um aplicativo de calendário simples para gerenciar eventos e compromissos diários, beseado nos da google.
+<p>Um aplicativo de calendário simples para gerenciar eventos e compromissos diários, beseado nos da google.</p>
 
 ## Como rodar o projeto
 
@@ -21,9 +21,26 @@ Um aplicativo de calendário simples para gerenciar eventos e compromissos diár
 8. Criar o arquivo `connection.php`
 9. Criar o arquivo `fetch_events.php`
 
-Completo! 
-Agora que finalizamos o projeto, vamos por ele em um docker, e posteriormente, iniciaceremos a por o nosso projeto na AWS.
-
+<p>Completo! </p>
+<p>Agora que finalizamos o projeto, vamos por ele em um docker, e posteriormente, iniciaceremos a por o nosso projeto na AWS.</p>
 
 ---
+
+### Docker
+<p>O primeiro passo é criar o Dockerfile (Para iniciar apenas esse projeto) e o docker-compose.yml (para iniciar esse projeto e por ele dentro de um compose)</p>
+
+1. Criar o `Dockerfile`
+2. Criar o `docker-compose.yml`
+
+<strong>Nota:</strong> Para iniciar como docker e esquecer o XAAMP, é necessario atualizar o arquivo de `connection.php`
+
+<p>$host = "db"; // <--- MUDANÇA AQUI! Não é mais 'localhost'</p>
+<p>$username = "root"; </p>
+<p>$password = ""; // Se você mudar a senha no docker-compose, mude aqui também</p>
+<p>$dbname = "meu_calendario";</p>
+
+<p>$conn = new mysqli($host, $username, $password, $dbname);</p>
+---
+
+Completo!
 
