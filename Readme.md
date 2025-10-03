@@ -24,6 +24,10 @@ Um aplicativo de calendário simples para gerenciar eventos e compromissos diár
 Completo! 
 Agora que finalizamos o projeto, vamos por ele em um docker, e posteriormente, iniciaceremos a por o nosso projeto na AWS.
 
+### Docker
+O primeiro passo é criar o Dockerfile (Para iniciar apenas esse projeto) e o docker-compose.yml (para iniciar esse projeto e por ele dentro de um compose)
 
+1. Criar o `Dockerfile`
+2. Criar o `docker-compose.yml`
 ---
 
