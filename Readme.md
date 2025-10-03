@@ -24,7 +24,7 @@
 <p>Completo! </p>
 <p>Agora que finalizamos o projeto, vamos por ele em um docker, e posteriormente, iniciaceremos a por o nosso projeto na AWS.</p>
 
----
+<hr>
 
 ### Docker
 <p>O primeiro passo é criar o Dockerfile (Para iniciar apenas esse projeto) e o docker-compose.yml (para iniciar esse projeto e por ele dentro de um compose)</p>
@@ -46,7 +46,35 @@
 
 
 <p>Em desenvolviomento...</p>
----
 
-### Cypress
+<hr>
 
+### 💻Cypress (Automação de Q.A)
+
+Devido a problemas de virtualização no ambiente local (conforme nota na seção Docker), priorizamos o objetivo principal de Qualidade de Software. A automação de testes de interface (UI) é executada usando o Cypress através do Node.js, validando o projeto rodando no XAMPP.
+
+### Pré-requisitos para Testes
+Para executar os testes de Q.A. e confirmar a funcionalidade do calendário:
+
+1. Node.js & npm (Necessário para rodar o Cypress).
+2. Servidor web XAMPP (Apache e MySQL devem estar ativos, rodando o projeto em `http://localhost/calendar-project/index.php`).
+
+### Como Rodar os Testes
+
+* Primeiramente, é necessario criar um diretório que será assim `calendar-qa-tests`. Isso é necessario para poder separar o produto da area de testes.
+
+* Agora você entra na pesta criada: `cd calendar-qa-tests`
+
+* Criar duas pastas, a `cypress` e a `e2e` e criar o arquivo `api_fetch_events.cy.js` de forma que fique assim:
+
+`cypress\e2e\api_fetch_events.cy.js`
+
+* Dentro dessa pasta você abre o cmd e digita `npm init -y` - Isso criar o package.json
+
+* Agora voccê preciso instalar o Cypress no seu projeto, digita isso: `npm install cypress --save-dev`
+
+* Em seguida so precisa pedir para abrir o Cypress: `npx cypress open`
+
+Concluido!
+
+<hr>
