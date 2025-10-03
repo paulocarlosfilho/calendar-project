@@ -66,8 +66,13 @@ Para executar os testes de Q.A. e confirmar a funcionalidade do calendário:
 * Agora você entra na pesta criada: `cd calendar-qa-tests`
 
 * Criar duas pastas, a `cypress` e a `e2e` e criar o arquivo `api_fetch_events.cy.js` de forma que fique assim:
-
 `cypress\e2e\api_fetch_events.cy.js`
+
+* Na mesma pasta crie o arquivo `api_add_events.cy.js` de forma que fique assim:
+`cypress\e2e\api_add_events.cy.js`
+
+* Na mesma pasta crie o arquivo `api_test_suite.cy.js` de forma que fique assim:
+`cypress\e2e\api_test_suite.cy.js`
 
 * Dentro dessa pasta você abre o cmd e digita `npm init -y` - Isso criar o package.json
 
