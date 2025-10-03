@@ -2,7 +2,7 @@
 
 // 1. Connection to Local MySQL Server (using XAMPP or MAMPP)
 
-$host = "db"; 
+$host = "localhost"; 
 $username = "root"; 
 $password = "";
 $dbname = "meu_calendario";
