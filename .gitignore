@@ -33,3 +33,11 @@ uploads/
 # Pastas de dependências de projetos (se usar Node.js ou Composer)
 /node_modules
 /vendor
+
+# Excluir a pasta de cache do Cypress
+cypress/screenshots/
+cypress/videos/
+
+# Excluir arquivos de configuração local
+.env
+settings-store.json
