@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # -------------------------------------
+  # 1. Serviço do Banco de Dados (MySQL)
+  # -------------------------------------
+  db:
+    image: mysql:8.0
+    container_name: calendar_db
+    # Mapeia uma pasta local (data) para o volume de dados do MySQL
+    # Isso garante que seus dados persistam mesmo se o contêiner parar ou for removido.
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      # CRÍTICO: Estas variáveis definem o usuário e senha
+      MYSQL_ROOT_PASSWORD: password_root # Senha forte em produção!
+      MYSQL_DATABASE: meu_calendario    # O nome do seu DB (usado no connection.php)
+      MYSQL_USER: root                  # O nome do seu usuário (usado no connection.php)
+      MYSQL_PASSWORD: ""                # A senha do usuário (vazia para root no seu setup, mas pode ser mudada)
+    # Abre a porta 3306 para que você possa acessar o DB com ferramentas externas (Workbench, etc.)
+    ports:
+      - "3306:3306"
+
+  # -------------------------------------
+  # 2. Serviço da Aplicação (PHP/Apache)
+  # -------------------------------------
+  app:
+    build: .                          # Usa o Dockerfile que você acabou de criar
+    container_name: calendar_app
+    # Abre a porta 80 do contêiner na porta 8080 da sua máquina (para evitar conflito com o XAMPP)
+    ports:
+      - "8080:80"
+    # Garante que a aplicação só inicie após o DB estar pronto
+    depends_on:
+      - db
+    # Mapeia o diretório atual para dentro do contêiner, para que
+    # qualquer mudança de código (no VS Code) seja instantânea no contêiner.
+    volumes:
+      - .:/var/www/html/
+
+# Define os volumes persistentes
+volumes:
+  db_data:
