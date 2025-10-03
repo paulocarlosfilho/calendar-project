@@ -42,5 +42,11 @@
 <p>$conn = new mysqli($host, $username, $password, $dbname);</p>
 ---
 
-Completo!
+<strong>Nota:</strong> O docker ta dando erro no meu pc, e eu não com tempo para trocar, formatar, etc... No lugar em trazer para o docker e fazer o terraform para por na aws, eu vou fazer os testes aqui. usarei o `Cypress` que funciona no `node`. Porém, deixarei os arquivos de Dockerfile e docker-compose.yml, pois pretendo contunuar em breve. Devido a esse fim, será necessario voltar o arquivo `connection.php`, removendo o `$host` e deixando como `localhost`.
+
+
+<p>Em desenvolviomento...</p>
+---
+
+### Cypress
 
