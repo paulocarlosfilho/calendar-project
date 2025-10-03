@@ -136,4 +136,3 @@ if(isset($_GET['error'])) {
 // Fechamento da conexão
 $conn->close();
 
-// Não coloque a tag de fechamento ?> para evitar bugs de espaço em branco!
