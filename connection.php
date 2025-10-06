@@ -2,10 +2,10 @@
 
 // 1. Connection to Local MySQL Server (using XAMPP or MAMPP)
 
-$host = "localhost"; 
+$host = "db"; //"localhost"; 
 $username = "root"; 
-$password = "";
-$dbname = "meu_calendario";
+$password = "password_root";
+$dbname = "meu_calendario";// "meu_calendario";
 
 // Conexão com 4 parâmetros: (servidor, usuário, senha, nome_do_banco)
 $conn = new mysqli($host, $username, $password, $dbname);

@@ -3,14 +3,17 @@
 // Conexão com o banco de dados
 include 'connection.php'; 
 
+
 // Inicializa as variáveis de mensagem
 $sucessMsg = "";
 $errorMsg = "";
+$handled = false; // Flag para saber se um handler POST foi executado
 
 // -------------------------------------------------------------
 // 1. Handler de Adição (POST action=add)
 // -------------------------------------------------------------
 if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["action"] ?? '') === "add") {
+    $handled = true; // Define que a requisição foi tratada (Add)
 
     // Sanitiza e coleta os dados do formulário
     $titulo = trim($_POST['titulo'] ?? "");
@@ -28,20 +31,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["action"] ?? '') === "add")
         
         $stmt->bind_param("sssssss", $titulo, $localizacao, $descricao, $data_inicio, $data_fim, $hora_inicio, $hora_fim);
         
+        
+        
         if ($stmt->execute()) {
             // CORREÇÃO DE Q.A.: Comentamos o redirecionamento (header) para o Cypress ler a mensagem.
             // O Cypress espera uma resposta da API, não um redirecionamento.
-            // header("Location: index.php?success=1"); 
-            echo "Compromisso adicionado com sucesso!"; 
+            header("Location: index.php?success=1"); 
+            //echo "Compromisso adicionado com sucesso!"; 
         } else {
             // Falha na execução do DB
-            // header("Location: index.php?error=1");
-            echo "Erro: Falha ao executar inserção no banco.";
+             header("Location: index.php?error=1");
+            //echo "Erro: Falha ao executar inserção no banco.";
         }
         $stmt->close();
     } else {
-        // header("Location: index.php?error=1");
-        echo "Erro: Campos obrigatórios não preenchidos.";
+        header("Location: index.php?error=1");
+        //echo "Erro: Campos obrigatórios não preenchidos.";
     }
 
     // CORREÇÃO DE Q.A. FINAL: Força a limpeza do buffer de saída do PHP (bug do XAMPP)
