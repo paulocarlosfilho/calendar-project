@@ -30,3 +30,8 @@ variable "project_name" {
   type        = string
   default     = "CalendarProject"
 }
+
+variable "my_ip" {
+  description = "Seu endereço IP para permitir acesso SSH ao EC2. Use '/32' no final (ex: 123.45.67.89/32)."
+  type        = string
+}
