@@ -8,9 +8,6 @@ WORKDIR /var/www/html
 # 'docker-php-ext-install' é o comando oficial para isso.
 RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable mysqli
 
-# 2. Remove o index.html padrão do Apache
-RUN rm /var/www/html/index.html
-
 # 3. Copia TODO o código do seu projeto (calendar-project) para o diretório raiz do Apache
 # O '.' representa o diretório atual do seu Dockerfile
 COPY . /var/www/html/

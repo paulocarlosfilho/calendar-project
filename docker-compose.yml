@@ -11,11 +11,14 @@ services:
     # Isso garante que seus dados persistam mesmo se o contêiner parar ou for removido.
     volumes:
       - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Script de inicialização do DB
+
     environment:
       # CRÍTICO: Estas variáveis definem o usuário e senha
       MYSQL_ROOT_PASSWORD: password_root # Senha forte em produção!
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"  # Permite senha vazia (não recomendado para produção)
       MYSQL_DATABASE: meu_calendario    # O nome do seu DB (usado no connection.php)
-      MYSQL_USER: root                  # O nome do seu usuário (usado no connection.php)
+      #MYSQL_USER: root                  # O nome do seu usuário (usado no connection.php)
       MYSQL_PASSWORD: ""                # A senha do usuário (vazia para root no seu setup, mas pode ser mudada)
     # Abre a porta 3306 para que você possa acessar o DB com ferramentas externas (Workbench, etc.)
     ports:
