@@ -57,6 +57,7 @@ resource "aws_security_group" "ec2_sg" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] 
+    cidr_blocks = [var.my_ip] # MELHORIA: Restringe o acesso SSH ao seu IP
   }
 
   # Acesso HTTP da aplicação (porta 8080 - mapeada pelo Docker) de qualquer lugar
@@ -157,15 +158,25 @@ resource "aws_instance" "calendar_app" {
   user_data = <<-EOF
               #!/bin/bash
               sudo yum update -y
+              yum update -y
+              # Instalar Git
+              yum install git -y
+
               # Instalar Docker
               sudo yum install docker -y
               sudo systemctl start docker
               sudo usermod -a -G docker ec2-user
+              yum install docker -y
+              systemctl start docker
+              systemctl enable docker
+              usermod -a -G docker ec2-user
               
               # Instalar Docker Compose
               sudo curl -L "https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
               sudo chmod +x /usr/local/bin/docker-compose
               sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+              curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+              chmod +x /usr/local/bin/docker-compose
 
               # Clonar seu projeto (ATENÇÃO: Substitua pelo seu repositório Git real)
               # Esta é a parte que você precisa de um repo público ou configurar acesso SSH/Token
@@ -179,6 +190,24 @@ resource "aws_instance" "calendar_app" {
               # sudo docker-compose up -d --build
               
               echo "Script de inicialização concluído. Você precisará de SSH para rodar o Docker Compose."
+              # Clonar o projeto
+              # ATENÇÃO: Substitua pela URL do seu repositório. Deve ser público para este script funcionar.
+              git clone https://github.com/paulocarlosfilho/calendar-project.git /home/ec2-user/calendar-project
+              cd /home/ec2-user/calendar-project
+
+              # Criar o arquivo .env para o Docker Compose usar
+              # Ele vai injetar o endereço do RDS e as credenciais no ambiente do contêiner
+              # NOTA: Seu docker-compose.yml precisa ser ajustado para ler este arquivo .env
+              cat <<EOT > .env
+DB_HOST=${aws_db_instance.calendar_db.address}
+DB_DATABASE=${aws_db_instance.calendar_db.db_name}
+DB_USERNAME=${var.db_username}
+DB_PASSWORD=${var.db_password}
+EOT
+
+              # Iniciar a aplicação com Docker Compose
+              # O comando é executado como ec2-user para permissões corretas
+              su - ec2-user -c "cd /home/ec2-user/calendar-project && /usr/local/bin/docker-compose up -d --build"
               EOF
 
   tags = {
